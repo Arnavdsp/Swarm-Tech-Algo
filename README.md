@@ -28,7 +28,7 @@ This repository presents three foundational swarm intelligence algorithms, each 
 ## Repository Structure
 
 ```
-swarm-algorithms/
+Swarm-Tech-Algo/
 ├── ant_colony_optimization.py
 ├── particle_swarm_optimization.py
 ├── artificial_bee_colony.py
@@ -42,8 +42,8 @@ swarm-algorithms/
 
 1. **Clone the repository:**
    ```
-   git clone https://github.com/your-username/swarm-algorithms.git
-   cd swarm-algorithms
+   git clone https://github.com/your-username/Swarm-Tech-Algo.git
+   cd Swarm-Tech-Algo
    ```
 
 2. **Run any algorithm:**
