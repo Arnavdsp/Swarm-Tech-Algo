@@ -1,0 +1,39 @@
+# Vision configuration. Merged into the same SwarmConfig as swarm.yaml, so you
+# can keep them separate or paste this block into that file.
+
+vision:
+  weights: "rtdetr-l.pt"     # or a VisDrone-finetuned checkpoint
+  imgsz: 640
+  device: "auto"             # "auto" | "cpu" | "0"
+
+  # Detection. Confidence sits lower than a normal IoU pipeline because NWD
+  # suppression handles the duplicates that low threshold lets through.
+  conf_thresh: 0.20
+  use_nwd_nms: true
+  nwd_thresh: 0.65
+  nwd_c: 12.8                # match the C used in training
+  use_reranking: true
+  iou_thresh: 0.45           # only used when use_nwd_nms is false
+  max_det: 500
+  class_names: ["pedestrian", "people", "bicycle", "car", "tricycle", "motor"]
+  person_classes: [0, 1]     # classes that get a face pass
+
+  # Face stage. Runs every frame_stride frames — on a Pi, running it every
+  # frame collapses the detector's throughput for no gain, because the tracker
+  # accumulates votes across frames anyway.
+  frame_stride: 3
+  min_person_px: 28
+  crop_pad: 0.06
+  face_backend: "insightface"
+  face_model: "buffalo_l"
+  face_det_size: 320
+
+  # Matching. Raise match_threshold to reduce false positives; raise
+  # votes_to_alert to require more frames of agreement before anything fires.
+  match_threshold: 0.38
+  match_margin: 0.05         # best must beat runner-up by this
+  votes_to_alert: 3
+  alert_cooldown_s: 30.0
+
+  db_path: "data/wanted_db.npz"
+  alert_log: "data/alerts.jsonl"

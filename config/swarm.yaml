@@ -1,0 +1,54 @@
+# Default swarm configuration.
+#   python scripts/run_drone_node.py --id 0 --config config/swarm.yaml
+# Anything omitted falls back to the dataclass defaults in swarm_drone/config.py.
+
+drone:
+  mass_kg: 1.45              # airframe + Pi + camera, without a payload share
+  max_thrust_n: 32.0         # all four motors, static, 100 %
+  hover_throttle: 0.42
+  max_tilt_rad: 0.35         # ~20 deg; keep tight while tethered
+  max_speed_mps: 3.0
+  max_climb_mps: 1.2
+  max_accel_mps2: 2.5
+  battery_wh: 77.0
+  reserve_frac: 0.25
+
+formation:
+  n_drones: 6
+  radius_m: 2.0              # circumradius == hexagon edge length
+  tether_len_m: 3.5
+  formation_yaw_rad: 0.0
+  k_formation: 1.4
+  k_consensus: 0.35          # must stay below k_formation / 2 — see
+                             # HexFormation.stability_margin()
+  k_damping: 1.1
+  k_integral: 0.45
+  integral_limit: 3.0
+  k_altitude_sync: 1.6
+  k_avoid: 2.4
+  avoid_radius_m: 1.5
+  slot_tolerance_m: 0.25
+  min_separation_m: 1.0
+  control_hz: 20.0
+
+lift:
+  payload_mass_kg: 4.0
+  attach_radius_m: 0.45
+  hover_alt_m: 3.0
+  pickup_alt_m: 1.2
+  lift_alt_m: 6.0
+  climb_rate_mps: 0.4
+  tension_ramp_s: 3.0
+  max_share_imbalance: 0.35
+  imbalance_grace_s: 1.0
+  settle_time_s: 1.5
+  safety_factor: 1.35
+  phase_timeout_s: 45.0
+  tether_stiffness_n_per_m: 10.0   # the elastic element in each tether
+
+comms:
+  bind_host: "0.0.0.0"
+  port: 47600
+  broadcast_addr: "255.255.255.255"
+  heartbeat_hz: 10.0
+  peer_timeout_s: 1.5
