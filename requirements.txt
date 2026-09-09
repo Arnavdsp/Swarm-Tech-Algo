@@ -1,0 +1,23 @@
+# Core — needed for the swarm/formation/lift half and every test.
+numpy>=1.24
+
+# Simulation plots (scripts/run_sim.py --plot, benchmark plots).
+matplotlib>=3.7
+
+# Vision pipeline. Install these on the machine that runs detection.
+opencv-python>=4.8          # use opencv-python-headless on a Pi without a display
+ultralytics>=8.2            # RT-DETR
+torch>=2.1                  # ultralytics backend
+
+# Face recognition. insightface pulls SCRFD (detection) + ArcFace (embeddings).
+insightface>=0.7.3
+onnxruntime>=1.16           # onnxruntime-gpu if you have CUDA
+
+# Flight controller link (only needed on the drone).
+pymavlink>=2.4
+
+# Optional: YAML config files. Without it, config files must be JSON.
+PyYAML>=6.0
+
+# Testing.
+pytest>=7.4

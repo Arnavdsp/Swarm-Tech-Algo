@@ -1,0 +1,23 @@
+# Raspberry Pi 4/5, 64-bit Raspberry Pi OS.
+#
+# Deliberately lighter than requirements.txt: no matplotlib (nothing to plot on
+# a drone) and ONNX Runtime instead of torch where you can get away with it.
+#
+#   sudo apt install -y python3-opencv libatlas-base-dev
+#   pip install -r requirements-pi.txt
+#
+# Torch on 64-bit ARM is a large install and RT-DETR on a Pi CPU runs at roughly
+# 2-3 fps at 640 px. That is why the pipeline samples the face stage on a stride
+# rather than running it every frame. For real throughput, export RT-DETR to
+# ONNX or NCNN, or add a Coral/Hailo accelerator.
+
+numpy>=1.24
+opencv-python-headless>=4.8
+onnxruntime>=1.16
+insightface>=0.7.3
+pymavlink>=2.4
+PyYAML>=6.0
+
+# Uncomment if running RT-DETR through ultralytics directly on the Pi:
+# ultralytics>=8.2
+# torch>=2.1
